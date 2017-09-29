@@ -28,7 +28,8 @@ require('normalize.css');
 require('spectacle/lib/themes/default/index.css');
 
 const images = {
-	thinkingReact: require('../assets/thinking-react.png')
+	thinkingReact: require('../assets/thinking-react.png'),
+	dataflow: require('../assets/data-event-flow.png')
 };
 
 preloader(images);
@@ -88,8 +89,8 @@ export default class Presentation extends React.Component {
 						<List>
 							<ListItem>React API</ListItem>
 							<ListItem>Event Handling</ListItem>
-							<ListItem>Data Flow</ListItem>
 							<ListItem>Iterations</ListItem>
+							<ListItem>Data Flow</ListItem>
 							<ListItem>Maintaining State → Redux</ListItem>
 							<ListItem>Redux</ListItem>
 							<List style={{ marginLeft: 60 }}>
@@ -157,7 +158,6 @@ export default class Presentation extends React.Component {
 					<Heading>JSX</Heading>
 					<Text textColor="secondary">A syntax extension for JavaScript</Text>
 					<CodePane
-						style={{ fontSize: '.77em' }}
 						lang="js"
 						source={require('raw-loader!../assets/JSX.example')}
 					/>
@@ -216,6 +216,27 @@ export default class Presentation extends React.Component {
 							<ListItem>Use setState to change the components state setState(setter: func | object, callback: func)</ListItem>
 						</List>
 					</Text>
+				</Slide>
+				<Slide>
+					<Heading>Event Handling</Heading>
+					<CodePane
+						lang="js"
+						source={require('raw-loader!../assets/JSX.example')}
+					/>
+					<JSXExample />
+				</Slide>
+				<Slide>
+					<Heading>Iterations</Heading>
+					<Text textColor="secondary">Using functional JS</Text>
+					<CodePane
+						lang="js"
+						source={require('raw-loader!../assets/iteration.example')}
+					/>
+				</Slide>
+				<Slide>
+					<Heading>Data Flow</Heading>
+					<Text textColor="secondary">One Way Data Flow</Text>
+					<Image src={images.dataflow.replace('/', '')} />
 				</Slide>
 			</Deck>
 		);

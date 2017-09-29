@@ -1,0 +1,27 @@
+const todos = [
+	{ name: 'Cook', completed: false },
+	{ name: 'Sleep', completed: true },
+	{ name: 'Read', completed: true },
+	{ name: 'Exercise', completed: false }
+];
+
+function Todos({ completed }) {
+	return (
+		<ul>
+			{completed ? (
+				todos.filter((todo, i) => <li key={`completedTodo-${i}`}>{todo.name}</li>)
+			) : (
+				todos.map((todo, i) => <li key={`todo-${i}`}>{todo.name}</li>)
+			)}
+		</ul>
+	);
+}
+
+export default function TodoApp() {
+	return (
+		<div>
+			<Todos />
+			<Todos completed />
+		</div>
+	);
+}
