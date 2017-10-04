@@ -108,14 +108,15 @@ export default class Presentation extends React.Component {
 				</Slide>
 				<CodeSlide
 					lang="js"
-					code={require('raw-loader!../react-shippingForm/webpack.dev')}
+					textSize={20}
+					code={require('raw-loader!../assets/webpack.example')}
 					ranges={[
 						{ loc: [0, 0], title: 'Step through major areas of a config' },
-						{ loc: [4, 5], title: 'Entry' },
-						{ loc: [5, 10], title: 'Output' },
-						{ loc: [10, 17], title: 'DevServer' },
-						{ loc: [18, 30], title: 'Module Rules' },
-						{ loc: [30, 31], title: 'Plugins' }
+						{ loc: [4, 10], title: 'Entry' },
+						{ loc: [10, 15], title: 'Output' },
+						{ loc: [15, 22], title: 'DevServer' },
+						{ loc: [22, 43], title: 'Module Rules' },
+						{ loc: [43, 44], title: 'Plugins' }
 					]}
 					showLineNumbers={false}
 				/>
@@ -157,10 +158,7 @@ export default class Presentation extends React.Component {
 				<Slide>
 					<Heading>JSX</Heading>
 					<Text textColor="secondary">A syntax extension for JavaScript</Text>
-					<CodePane
-						lang="js"
-						source={require('raw-loader!../assets/JSX.example')}
-					/>
+					<CodePane lang="js" source={require('raw-loader!../assets/JSX.example')} />
 					<JSXExample />
 				</Slide>
 				<Slide>
@@ -171,7 +169,7 @@ export default class Presentation extends React.Component {
 							<ListItem>Full CSS support</ListItem>
 							<ListItem>Tiny (2kbs)</ListItem>
 							<ListItem>Automatic vendor prefixing</ListItem>
-							<ListItem>Works the depreciated {`<style scoped>`}</ListItem>
+							<ListItem>Works like the depreciated {`<style scoped>`}</ListItem>
 						</List>
 					</div>
 					<Text textColor="secondary">
@@ -213,30 +211,120 @@ export default class Presentation extends React.Component {
 					<Text textColor="tertiary">
 						<List>
 							<ListItem>State should be treated as immutable</ListItem>
-							<ListItem>Use setState to change the components state setState(setter: func | object, callback: func)</ListItem>
+							<ListItem>
+								Use setState to change the components state setState(setter: func | object, callback:
+								func)
+							</ListItem>
 						</List>
 					</Text>
 				</Slide>
 				<Slide>
 					<Heading>Event Handling</Heading>
-					<CodePane
-						lang="js"
-						source={require('raw-loader!../assets/JSX.example')}
-					/>
+					<CodePane lang="js" source={require('raw-loader!../assets/JSX.example')} />
 					<JSXExample />
 				</Slide>
 				<Slide>
 					<Heading>Iterations</Heading>
 					<Text textColor="secondary">Using functional JS</Text>
-					<CodePane
-						lang="js"
-						source={require('raw-loader!../assets/iteration.example')}
-					/>
+					<CodePane lang="js" source={require('raw-loader!../assets/iteration.example')} />
 				</Slide>
 				<Slide>
 					<Heading>Data Flow</Heading>
 					<Text textColor="secondary">One Way Data Flow</Text>
 					<Image src={images.dataflow.replace('/', '')} />
+				</Slide>
+				<Slide>
+					<Heading>Maintaining State → Redux</Heading>
+					<div style={{ display: 'flex', justifyContent: 'center' }}>
+						<List>
+							<ListItem>Large component trees can lead to complexities in maintaining state</ListItem>
+							<ListItem>
+								Multiple ways to implement state maintenance making it difficult for team work
+							</ListItem>
+							<ListItem>
+								Application state (especially in large apps) can be difficult to visualize
+							</ListItem>
+							<ListItem>
+								How do you work on large apps with a team and maintain state in a predictable manner?
+								One answer is Redux
+							</ListItem>
+						</List>
+					</div>
+				</Slide>
+				<Slide>
+					<Heading>Redux</Heading>
+					<Text textColor="secondary">A state management library</Text>
+					<div style={{ display: 'flex', justifyContent: 'center' }}>
+						<List>
+							<ListItem>An opinionated architecture for your app</ListItem>
+							<ListItem>Great developer tools</ListItem>
+							<ListItem>Tiny (2kbs)</ListItem>
+							<ListItem>Single source of truth</ListItem>
+							<ListItem>State is read-only</ListItem>
+							<ListItem>Changes are made with pure functions</ListItem>
+						</List>
+					</div>
+				</Slide>
+				<Slide>
+					<Heading>Action Creators</Heading>
+					<Text textColor="secondary">
+						Actions are payloads of information that send data from your application to your store. They are
+						the only source of information for the store. You send them to the store using store.dispatch().
+					</Text>
+					<CodePane textSize={16} lang="js" source={require('raw-loader!../assets/action-creator.example')} />
+				</Slide>
+				<Slide>
+					<Heading>Reducers</Heading>
+					<Text textColor="secondary">
+						Reducers respond to actions by producing a new state. State is never mutated by the reducer.
+						Reducers create a brand new application state.
+					</Text>
+					<CodePane textSize={16} lang="js" source={require('raw-loader!../assets/reducer.example')} />
+				</Slide>
+				<Slide>
+					<Heading>Store</Heading>
+					<Text textColor="secondary">
+						Stores hold your application state. There is exactly 1 store in your application.
+					</Text>
+					<div style={{ display: 'flex', justifyContent: 'center' }}>
+						<List>
+							<ListItem>Holds application state</ListItem>
+							<ListItem>Allows access to state via getState()</ListItem>
+							<ListItem>Allows state to be updated via dispatch(action)</ListItem>
+							<ListItem>Registers listeners via subscribe(listener)</ListItem>
+							<ListItem>
+								Handles unregistering of listeners via the function returned by subscribe(listener)
+							</ListItem>
+						</List>
+					</div>
+					<Text textColor="secondary">
+						The last two bullets are not often used in React application in favor of React's unidirectional
+						data-flow model
+					</Text>
+				</Slide>
+				<CodeSlide
+					lang="js"
+					textSize={20}
+					code={require('raw-loader!../assets/store.example')}
+					ranges={[
+						{ loc: [0, 0], title: 'Step through overall use in React Apps' },
+						{ loc: [5, 14], title: 'Configure Store' },
+						{ loc: [8, 11], title: 'Configure Middleware' },
+						{ loc: [11, 12], title: 'Return Store' },
+						{ loc: [20, 21], title: 'Import configureStore function' },
+						{ loc: [23, 24], title: 'Create your store' },
+						{ loc: [26, 29], title: 'Wrap your app with the store using Provider' },
+						{ loc: [35, 36], title: 'Import connect from react-redux' },
+						{ loc: [235, 238], title: 'Define how state will be mapped to your component' },
+						{ loc: [239, 259], title: 'Define how dispatch will be mapped to your component' },
+						{ loc: [260, 261], title: 'Export your connected component' },
+					]}
+					showLineNumbers={true}
+				/>
+				<Slide bgColor="tertiary">
+					<Heading size={1} textColor="secondary">
+						Questions
+					</Heading>
 				</Slide>
 			</Deck>
 		);

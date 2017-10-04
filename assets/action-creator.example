@@ -1,0 +1,24 @@
+const toggleDisableButton = (disabled) => ({ type: 'TOGGLE_DISABLE_BUTTON', disabled });
+
+export const getStatesForCountry = (country) => {
+
+	return (dispatch, getState, fetch) => {
+
+		dispatch(toggleDisableButton(true));
+
+		const { form } = getState();
+		return fetch(`/api/regions/countries/${country}/states`).then((resp) => resp.json()).then((data) => {
+
+			if (form.loading) {
+
+				dispatch(toggleLoading(false));
+
+			}
+			dispatch(toggleDisableButton(false));
+			return dispatch(receivedStates(data));
+
+		});
+
+	};
+
+};
