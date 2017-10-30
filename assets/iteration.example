@@ -9,7 +9,7 @@ function Todos({ completed }) {
 	return (
 		<ul>
 			{completed ? (
-				todos.filter((todo, i) => <li key={`completedTodo-${i}`}>{todo.name}</li>)
+				todos.filter.(todo => todo.completed).map((todo, i) => <li key={`completedTodo-${i}`}>{todo.name}</li>)
 			) : (
 				todos.map((todo, i) => <li key={`todo-${i}`}>{todo.name}</li>)
 			)}
